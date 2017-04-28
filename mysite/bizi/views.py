@@ -4,7 +4,7 @@ from .models import Category, Img
 # Create your views here.
 def index(request):
     categorys = Category.objects.all()
-    imgs = Img.objects.filter('-pub_date')[:15]
+    imgs = Img.objects.all().order_by('-pub_date')[:15]
     return render(request, 'bizi/index.html', {
         'categorys': categorys,
         'images': imgs
