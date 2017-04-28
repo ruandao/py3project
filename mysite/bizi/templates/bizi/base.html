@@ -1,0 +1,14 @@
+{% load static %}
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="{% static 'bizi/main.css' %}" />
+</head>
+<body>
+  <div id="header"></div>
+  <div id="aside"></div>
+  <div id="content">
+    {% block content %}
+    {% endblock %}
+  </div>
+</body>
+</html>

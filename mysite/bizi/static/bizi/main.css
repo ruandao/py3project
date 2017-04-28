@@ -1,0 +1,14 @@
+.header{
+  background-color: yellow;
+  height: 100px;
+}
+
+.aside {
+  background-color: gray;
+  width: 100px;
+}
+
+.content {
+  background-color: red;
+  
+}

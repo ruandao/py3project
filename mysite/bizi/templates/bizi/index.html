@@ -1,0 +1,24 @@
+{% extends 'bizi/base.html' %}
+
+{% block aside %}
+  <ul>
+    {% for category in categorys %}
+    <li>
+      <a href="{% url 'bizi:category' category.id }">{{ category }}</a>
+    </li>
+    {% endfor %}
+  </ul>
+{% endblock %}
+{% block content %}
+
+  <ul>
+  {% for item in images %}
+    <li>
+      <div class="imageItem">
+        <img src="{% url 'bizi:img' item.id %}" />
+        <p>{{ item.title }}</p>
+      </div>
+    </li>
+  {% endfor %}
+  <ul>
+{% endblock %}

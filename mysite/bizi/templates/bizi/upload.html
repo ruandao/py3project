@@ -1,0 +1,12 @@
+{% extends 'bizi/base.html' %}
+
+{% block content %}
+<form action="{% url 'bizi:upload' %}" method="post">
+  {% csrf_token %}
+  <label for="file">文件</label>
+  <input id="file" type="file" />
+  <input type="text" placeholder="分类" />
+  <input type="text" placeholder="标题" />
+  <input type="submit" value="提交" />
+</form>
+{% endblock %}
