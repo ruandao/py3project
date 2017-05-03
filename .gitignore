@@ -3,3 +3,4 @@ py2env/
 .idea/
 *.pyc
 *.sqlite3
+media/
