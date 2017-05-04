@@ -6,14 +6,15 @@ from django.db import models
 # Create your models here.
 class VAccount(models.Model):
     vName = models.CharField(max_length=30)
-    vAccount = models.CharField(max_length=30)
+    vAccount = models.CharField(max_length=30, primary_key = True)
+    avatar = models.ImageField(upload_to='uploads/')
     vQQ = models.CharField(max_length=30)
     category = models.CharField(max_length=250)
     area = models.CharField(max_length=30)
     tags = models.CharField(max_length=250)
     link = models.CharField(max_length=250)
     description = models.TextField()
-    qrCode = models.ImageField(upload_to='uploads/qrCodes/')
+    qrCode = models.ImageField(upload_to='uploads/')
     crawl_url = models.CharField(max_length=250)
 
 class Blog(models.Model):

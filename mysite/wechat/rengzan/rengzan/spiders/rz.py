@@ -19,22 +19,37 @@ class RzSpider(scrapy.Spider):
 
     def parse_item(self, response):
         containers = response.css(".cont.l ul li")
-        vName = containers[0].css("::text").extract()[2].strip()
-        vAccount = containers[1].css("::text").extract()[2].strip()
-        vQQ = containers[2].css("::text").extract()[2].strip()
-        try:
-            category = containers[3].css("abbr::text").extract()[0].strip()
-        except:
-            category = ""
-        area = containers[4].css("::text").extract()[2].strip()
-        tags = containers[5].css("a::text").extract()
-        try:
-            link = containers[7].css("a::attr(href)").extract()
-        except:
-            link = ""
+        vName, vAccount, vQQ, category, area, tags, link = \
+        "",    "",       "",  "",        "",  [],   []
+        for container in containers:
+            x = container.css("::text").extract()
+            x = [j.strip() for j in x if j.strip() != ""]
+            if len(x) >= 2:
+                if u"微信名称：" in x[0]:
+                    vName = x[1]
+                    print(vName)
+                if u"微信帐号：" in x[0]:
+                    vAccount = x[1]
+                    print(vAccount)
+                if u'客服QQ：' in x[0]:
+                    vQQ = x[1]
+                    print(vQQ)
+                if u'行业分类：' in x[0]:
+                    category = x[1]
+                    print(category)
+                if u'所在地区：' in x[0]:
+                    area = x[1]
+                    print(area)
+                if u'标签tag：' in x[0]:
+                    tags = x[1:]
+                    print(tags)
+                if u'关联推广：' in x[0]:
+                    link = container.css("a::attr(href)").extract()
         description = response.css(".main_case.l .scroll.l p::text").extract_first().strip()
         qrCodeUrlPart = response.css(".main_case.l .cont_cat.l img::attr(src)").extract_first().strip()
         qrCodeUrl = urlparse.urljoin(response.url, qrCodeUrlPart)
+        avatar_url = response.css(".main_case.l .wrappic.l img::attr(src)").extract_first().strip()
+        avatar_url = urlparse.urljoin(response.url, avatar_url)
         crawl_url = response.url
 
         item = VAccountItem()
@@ -46,7 +61,7 @@ class RzSpider(scrapy.Spider):
         item['tags'] = ",".join(tags)
         item['link'] = ",".join(link)
         item['description'] = description
-        item['image_urls'] = [qrCodeUrl]
+        item['image_urls'] = [qrCodeUrl, avatar_url]
         item['crawl_url'] = crawl_url
         return item
 

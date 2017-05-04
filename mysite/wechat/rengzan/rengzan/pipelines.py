@@ -21,8 +21,11 @@ class RengZanImagesPipeline(ImagesPipeline):
     def item_completed(self, results, item, info):
         image_path = [x['path'] for ok, x in results if ok]
         image_url = ""
+        avatar_url = ""
         if len(image_path) != 0:
             image_url = image_path[0]
+            if len(image_path) >= 2:
+                avatar_url = image_path[1]
         vAccount = VAccount(vName = item['vName'],
                             vAccount = item['vAccount'],
                             vQQ = item['vQQ'],
@@ -32,6 +35,7 @@ class RengZanImagesPipeline(ImagesPipeline):
                             link = item['link'],
                             description = item['description'],
                             qrCode = image_url,
+                            avatar = avatar_url,
                             crawl_url = item['crawl_url'],
                             )
         vAccount.save()
