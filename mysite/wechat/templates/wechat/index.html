@@ -1,8 +1,28 @@
 {% extends 'wechat/base.html' %}
 
-{% block header %}
-{% endblock %}
 {% block content %}
+    <div>
+    {% for account in accounts %}
+        <div>
+            <img src="{{account.avatar.url}}">
+        </div>
+        <ul>
+            <li>微信名称：{{account.vName}}</li>
+            <li>微信账号：{{account.vAccount}}</li>
+            <li>客服QQ：{{account.vQQ}}</li>
+            <li>分类：{{account.category}}</li>
+            <li>地区：{{account.area}}</li>
+            <li>标签：{{account.tags}}</li>
+            <li>关联链接：{{account.link}}</li>
+        </ul>
+        <div>
+            <img src="{{account.qrCode.url}}">
+        </div>
+        <div>
+            <p>{{account.description}}</p>
+        </div>
+    {% endfor %}
+    </div>
 {% endblock %}
 {% block footer %}
 {% endblock %}
