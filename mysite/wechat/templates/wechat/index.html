@@ -1,28 +1,44 @@
 {% extends 'wechat/base.html' %}
 
+
 {% block content %}
-    <div>
+    <div class="row">
     {% for account in accounts %}
-        <div>
-            <img src="{{account.avatar.url}}">
-        </div>
-        <ul>
-            <li>微信名称：{{account.vName}}</li>
-            <li>微信账号：{{account.vAccount}}</li>
-            <li>客服QQ：{{account.vQQ}}</li>
-            <li>分类：{{account.category}}</li>
-            <li>地区：{{account.area}}</li>
-            <li>标签：{{account.tags}}</li>
-            <li>关联链接：{{account.link}}</li>
-        </ul>
-        <div>
-            <img src="{{account.qrCode.url}}">
-        </div>
-        <div>
-            <p>{{account.description}}</p>
+        <div class="col-xs-4">
+            <div class="row">
+                <div class="col-xs-4">
+                    <img src="{{account.avatar_url}}" width="102" height="102">
+                </div>
+                <div class="col-xs-8">
+                    <a href="">{{account.vName}}</a>
+                </div>
+            </div>
         </div>
     {% endfor %}
     </div>
+
+    <nav aria-label="Page navigation">
+      <ul class="pagination">
+        <li>
+          <a href="{% url 'wechat:alluser' 1 %}" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+          {% if prePage %}
+            <li><a href="{% url 'wechat:alluser' prePage %}">上一页</a></li>
+          {% endif %}
+          <li><a href="#">{{curPage}}</a> </li>
+          {% if nextPage %}
+            <li><a href="{% url 'wechat:alluser' nextPage %}">下一页</a> </li>
+          {% endif %}
+          <li>
+          <a href="{% url 'wechat:alluser' latestPage %}" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
 {% endblock %}
 {% block footer %}
 {% endblock %}

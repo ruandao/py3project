@@ -6,8 +6,25 @@ from django.shortcuts import render
 from .models import VAccount
 
 # Create your views here.
-def index(request):
-    accounts = VAccount.objects.all()[:10]
-    return render(request, 'wechat/index.html', {
-        "accounts": accounts,
-    })
+def index(request, curPage=1):
+    try:
+        curPage = int(curPage)
+    except:
+        curPage = 1
+    accounts = VAccount.objects.all()[(curPage - 1) * 20: curPage * 20]
+    count = VAccount.objects.all().count()
+    allPage = count / 20
+    latestPage = allPage
+    if allPage * 20 < count:
+        latestPage = allPage + 1
+
+    d = {}
+    d["accounts"] = accounts
+    d["curPage"] = curPage
+    d["latestPage"] = latestPage
+    if curPage != 1:
+        d["prePage"]= curPage - 1
+    if curPage != latestPage:
+        d["nextPage"] = curPage + 1
+
+    return render(request, 'wechat/index.html', d)

@@ -45,7 +45,10 @@ class RzSpider(scrapy.Spider):
                     print(tags)
                 if u'关联推广：' in x[0]:
                     link = container.css("a::attr(href)").extract()
-        description = response.css(".main_case.l .scroll.l p::text").extract_first().strip()
+        try:
+            description = response.css(".main_case.l .scroll.l p::text").extract_first().strip()
+        except:
+            description = ""
         qrCodeUrlPart = response.css(".main_case.l .cont_cat.l img::attr(src)").extract_first().strip()
         qrCodeUrl = urlparse.urljoin(response.url, qrCodeUrlPart)
         avatar_url = response.css(".main_case.l .wrappic.l img::attr(src)").extract_first().strip()

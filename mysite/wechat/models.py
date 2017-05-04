@@ -17,6 +17,11 @@ class VAccount(models.Model):
     qrCode = models.ImageField(upload_to='uploads/')
     crawl_url = models.CharField(max_length=250)
 
+    @property
+    def avatar_url(self):
+        if self.avatar and hasattr(self.avatar, "url"):
+            return self.avatar.url
+
 class Blog(models.Model):
     account = models.ForeignKey(VAccount)
     title = models.CharField(max_length=250)
