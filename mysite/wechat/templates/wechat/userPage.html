@@ -1,10 +1,15 @@
 {% extends 'wechat/base.html' %}
 
+{% block head %}
+    <title>我推荐的：{{ account.vName }}</title>
+    <meta name="Keywords" Content="{{ account.tags }}">
+    <meta name="Description" Content="{{ account.description }}">
+{% endblock %}
 
 {% block content %}
     <div class="row">
         <div class="col-xs-3">
-            <img src="{{ account.avatar_url }}">
+            <img src="{{ account.avatar_url }}" width="250" height="250">
         </div>
         <div class="col-xs-3">
             <h1>{{ account.vName }}</h1>

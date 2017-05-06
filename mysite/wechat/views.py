@@ -30,7 +30,7 @@ def index(request, curPage=1):
 
     return render(request, 'wechat/index.html', d)
 
-def userPage(request, userid):
+def userPage(request, userid, userName):
     account = get_object_or_404(VAccount, pk=userid)
 
     d = {}

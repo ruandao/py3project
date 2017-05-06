@@ -10,7 +10,7 @@
                     <img src="{{account.avatar_url}}" width="102" height="102">
                 </div>
                 <div class="col-xs-8">
-                    <a href="{% url 'wechat:userPage' account.vAccount %}">{{account.vName}}</a>
+                    <a href="{% url 'wechat:userPage' account.vAccount account.vName %}">{{account.vName}}</a>
                 </div>
             </div>
         </div>
