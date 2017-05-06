@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+
 
 from .models import VAccount
 
@@ -28,3 +29,10 @@ def index(request, curPage=1):
         d["nextPage"] = curPage + 1
 
     return render(request, 'wechat/index.html', d)
+
+def userPage(request, userid):
+    account = get_object_or_404(VAccount, pk=userid)
+
+    d = {}
+    d['account'] = account
+    return render(request, 'wechat/userPage.html', d)

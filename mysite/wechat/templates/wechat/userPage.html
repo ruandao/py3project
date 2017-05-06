@@ -1,0 +1,53 @@
+{% extends 'wechat/base.html' %}
+
+
+{% block content %}
+    <div class="row">
+        <div class="col-xs-3">
+            <img src="{{ account.avatar_url }}">
+        </div>
+        <div class="col-xs-3">
+            <h1>{{ account.vName }}</h1>
+            <div class="row">
+                <label>微信名称：</label>
+                {{ account.vName }}
+            </div>
+            <div class="row">
+                <label>微信账号：</label>
+                {{ account.vAccount }}
+            </div>
+            <div class="row">
+                <label>客服QQ：</label>
+                {{ account.vQQ }}
+            </div>
+            <div class="row">
+                <label>行业分类：</label>
+                {{ account.category }}
+            </div>
+            <div class="row">
+                <label>所在地区：</label>
+                {{ account.area }}
+            </div>
+            <div class="row">
+                <label>标签：</label>
+                {{ account.tags }}
+            </div>
+            <div class="row">
+                <label>关联推广：</label>
+                {{ account.link }}
+            </div>
+        </div>
+        <div class="col-xs-3">
+            <img src="{{ account.qrCode.url }}">
+        </div>
+    </div>
+    <div class="row">
+        <p>{{ account.description }}</p>
+    </div>
+
+
+
+
+{% endblock %}
+{% block footer %}
+{% endblock %}
