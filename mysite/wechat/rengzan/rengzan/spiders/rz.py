@@ -3,6 +3,33 @@ import scrapy
 import urlparse
 from rengzan.items import VAccountItem, BlogItem
 
+class RzBlogSpider(scrapy.Spider):
+    name = "rzBlog"
+    allowed_domains = ["rengzan.com"]
+    start_urls = ['http://www.rengzan.com/photo-index-id-191.html']
+
+    def parse(self, response):
+        item_urls = response.css(".ft .list-h3 a::attr(href)").extract()
+        for url in item_urls:
+            yield scrapy.Request(urlparse.urljoin(response.url, url), callback=self.parse_item)
+
+        page_urls = response.css(".pagewx a::attr(href)").extract()
+        for url in page_urls:
+            yield scrapy.Request(urlparse.urljoin(response.url, url), callback=self.parse)
+
+    def parse_item(self, response):
+        title = response.css(".content-box .up-box .list-h3::text").extract_first()
+        contents = response.css(".entry p::text").extract()
+        vName = response.css(".R-mainbox1 .author-info .userinf a::text").extract_first()
+        vAccount = response.css(".R-mainbox1 .author-info .summary::text").extract_first()
+
+        blog = BlogItem()
+        blog['title'] = title
+        blog['content'] = "\n".join(contents)
+        blog['vName'] = vName
+        blog['vAccount'] = vAccount
+        return blog
+
 class RzSpider(scrapy.Spider):
     name = "rz"
     allowed_domains = ["rengzan.com"]

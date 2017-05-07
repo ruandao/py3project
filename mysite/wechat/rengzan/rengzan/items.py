@@ -22,5 +22,8 @@ class VAccountItem(scrapy.Item):
     image_urls = scrapy.Field()
     crawl_url = scrapy.Field()
 
-class BlogItem(DjangoItem):
-    django_model = Blog
+class BlogItem(scrapy.Item):
+    vName = scrapy.Field()
+    vAccount = scrapy.Field()
+    title = scrapy.Field()
+    content = scrapy.Field()

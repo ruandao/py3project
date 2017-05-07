@@ -24,8 +24,8 @@ BOT_NAME = 'rengzan'
 SPIDER_MODULES = ['rengzan.spiders']
 NEWSPIDER_MODULE = 'rengzan.spiders'
 ITEM_PIPELINES = {
-    'rengzan.pipelines.RengZanImagesPipeline': 120,
-    'rengzan.pipelines.RengzanPipeline': 300,
+    # 'rengzan.pipelines.RengZanImagesPipeline': 120,
+    'rengzan.pipelines.RengzanBlogPipeline': 300,
 }
 IMAGES_STORE = '../../media/' # 设置图片保存目录
 DOWNLOAD_DELAY = 1 # 添加下载延迟配置
