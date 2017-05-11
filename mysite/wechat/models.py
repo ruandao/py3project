@@ -26,4 +26,4 @@ class Blog(models.Model):
     account = models.ForeignKey(VAccount)
     title = models.CharField(max_length=250)
     content = models.TextField()
-    recordTime = models.DateTimeField(auto_now_add=True)
+    recordDate = models.DateTimeField(auto_now_add=True)

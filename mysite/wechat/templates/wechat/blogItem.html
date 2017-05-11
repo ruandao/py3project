@@ -1,0 +1,16 @@
+{% extends 'wechat/blogbase.html' %}
+
+
+{% block content %}
+    <div class="row">
+        <h3>
+            <a href="{% url 'wechat:blog' blog.id blog.title %}">{{ blog.title }}</a>
+        </h3>
+        {% for content in contents %}
+            <p>{{ content }}</p>
+        {% endfor %}
+    </div>
+
+{% endblock %}
+{% block footer %}
+{% endblock %}

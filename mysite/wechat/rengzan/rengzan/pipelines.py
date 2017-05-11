@@ -28,7 +28,8 @@ class RengzanBlogPipeline(object):
                 blog = Blog(account = account, title = title, content = content)
                 blog.save()
                 return blog
-        print("can't find blog!!!")
+        blog = Blog(title = title, content = content)
+        blog.save()
         return item
 
 class RengZanImagesPipeline(ImagesPipeline):
